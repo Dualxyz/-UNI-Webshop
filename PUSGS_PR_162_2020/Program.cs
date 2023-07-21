@@ -1,5 +1,10 @@
+using AutoMapper;
+using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using PUSGS_PR_162_2020.Infrastructure;
+using PUSGS_PR_162_2020.Interfaces;
+using PUSGS_PR_162_2020.Mapper;
+using PUSGS_PR_162_2020.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +15,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#region Database Context
 //Dependancy injection for APIDBContext
 builder.Services.AddDbContext<APIDBContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectString")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectString")).UseExceptionProcessor());
 
+#endregion
+
+#region Creating a Mapper Profile
+MapperConfiguration config = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MapperProfile());
+});
+IMapper mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
+#endregion
+
+#region Adding all the Services
+builder.Services.AddScoped<IUserService, UserService>();
+#endregion
 
 var app = builder.Build();
 

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PUSGS_PR_162_2020.DTO.LoginDTO;
+using PUSGS_PR_162_2020.DTO.RegisterDTO;
+using PUSGS_PR_162_2020.DTO.UserInfoDTO;
 using PUSGS_PR_162_2020.Infrastructure;
 using PUSGS_PR_162_2020.Interfaces;
 using PUSGS_PR_162_2020.Models;
@@ -15,113 +18,115 @@ namespace PUSGS_PR_162_2020.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly APIDBContext _context;
-        //private readonly IUserService _userService;
+        private readonly IUserService _userService;
 
-        public UsersController(APIDBContext context/*, IUserService service*/)
+        public UsersController(IUserService service)
         {
-            _context = context;
-            //_userService = service;
+            //_context = context;
+            _userService = service;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public IActionResult GetUsers()
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
-            return await _context.Users.ToListAsync();
+            return Ok(_userService.GetAllUsers());
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public IActionResult GetUser(long id)
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
+            UserResponseDTO userResponse;
+            try
             {
-                return NotFound();
+                userResponse = _userService.GetUserById(id);
+            } catch (Exception ex)
+            {
+                return NotFound(ex.Message);
             }
-
-            return user;
+            return Ok(userResponse);
         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        public IActionResult PutUser(long id, [FromBody] UserRequestDTO requestDto)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            //var smt = User.HasClaim("Id", id.ToString());
+            //if (!User.HasClaim("Id", id.ToString()))
+            //{
+            //    return Forbid();
+            //}
 
-            _context.Entry(user).State = EntityState.Modified;
+            UserResponseDTO user;
 
             try
             {
-                await _context.SaveChangesAsync();
+                user = _userService.UpdateUser(id, requestDto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(e.Message);
             }
 
-            return NoContent();
+            return Ok(user);
         }
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public IActionResult PostUser([FromBody] RegisterRequestDTO user)
         {
-          if (_context.Users == null)
-          {
-              return Problem("Entity set 'APIDBContext.Users'  is null.");
-          }
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            UserResponseDTO userResponse;
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            try
+            {
+                userResponse = _userService.RegisterUser(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(userResponse);
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(long id)
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteUser(long id)
+        //{
+        //    if (_context.Users == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var user = await _context.Users.FindAsync(id);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _context.Users.Remove(user);
+        //    await _context.SaveChangesAsync();
+
+        //    return NoContent();
+        //}
+
+
+        [HttpPost("login")]
+        public IActionResult LoginUser([FromBody] LoginRequestDTO req)
         {
-            if (_context.Users == null)
+            LoginResponseDTO resp;
+
+            try
             {
-                return NotFound();
-            }
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+                resp = _userService.LoginUser(req);
+            } catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool UserExists(long id)
-        {
-            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return Ok(resp);
         }
     }
 }

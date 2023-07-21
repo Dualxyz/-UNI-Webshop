@@ -1,4 +1,5 @@
-﻿using PUSGS_PR_162_2020.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using PUSGS_PR_162_2020.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,9 +14,10 @@ namespace PUSGS_PR_162_2020.Models
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Name { get; set; }  = string.Empty;
-        public string Surname { get; set;} = string.Empty;
-        public string Adress { get; set;} = string.Empty;
+        public string FirstName { get; set; }  = string.Empty;
+        public string LastName { get; set;} = string.Empty;
+        public string Address { get; set;} = string.Empty;
+        public string Birthdate { get; set; } = string.Empty;
         public AccType Type { get; set; }
 
         //Slika korisnika

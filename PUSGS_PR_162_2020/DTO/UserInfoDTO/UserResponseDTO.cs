@@ -2,7 +2,7 @@
 
 namespace PUSGS_PR_162_2020.DTO.UserInfoDTO
 {
-    public class UserDTO
+    public class UserResponseDTO
     {
         public long Id { get; set; }
         public string Username { get; set; } = string.Empty;

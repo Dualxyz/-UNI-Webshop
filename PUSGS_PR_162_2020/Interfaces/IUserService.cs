@@ -6,11 +6,11 @@ namespace PUSGS_PR_162_2020.Interfaces
 {
     public interface IUserService
     {
-        //List<UserDTO> GetAllUsers();
-        //UserDTO GetUserById(long id);
-        //UserDTO RegisterUser(RegisterRequestDTO requestDto);
-        //UserDTO UpdateUser(long id, UserRequestDTO requestDto);
-        //LoginResponseDTO LoginUser(LoginRequestDTO requestDto);
+        List<UserResponseDTO> GetAllUsers();
+        UserResponseDTO GetUserById(long id);
+        UserResponseDTO RegisterUser(RegisterRequestDTO requestDto);
+        UserResponseDTO UpdateUser(long id, UserRequestDTO requestDto);
+        LoginResponseDTO LoginUser(LoginRequestDTO requestDto);
         ////VerificationResponseDto VerifyUser(long id, VerificationRequestDto requestDto);
     }
 }

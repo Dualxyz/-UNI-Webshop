@@ -13,5 +13,19 @@ namespace PUSGS_PR_162_2020.Infrastructure
         }
 
         public DbSet<User> Users { get; set; }  //Will be used to create a table with migrations
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+            .HasKey(u => u.Id);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
     }
 }
