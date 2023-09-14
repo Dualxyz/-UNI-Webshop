@@ -14,6 +14,7 @@ namespace PUSGS_PR_162_2020.Infrastructure
         }
 
         public DbSet<User> Users { get; set; }  //Will be used to create a table with migrations
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

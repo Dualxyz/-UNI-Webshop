@@ -22,6 +22,8 @@ namespace PUSGS_PR_162_2020.Config
             builder.Property(x => x.Birthdate).IsRequired().HasMaxLength(24);
             builder.Property(x => x.Address).IsRequired().HasMaxLength(30);
             builder.Property(x => x.Type).HasConversion<string>();
+
+            //Add verification field
         }
     }
 }

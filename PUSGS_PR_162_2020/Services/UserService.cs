@@ -89,8 +89,6 @@ namespace PUSGS_PR_162_2020.Services
         public UserResponseDTO RegisterUser(RegisterRequestDTO requestDto)
         {
             User user = _mapper.Map<User>(requestDto);
-            
-
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
 
             //Add verification status field (=
