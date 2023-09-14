@@ -15,6 +15,7 @@ namespace PUSGS_PR_162_2020.Infrastructure
 
         public DbSet<User> Users { get; set; }  //Will be used to create a table with migrations
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +30,8 @@ namespace PUSGS_PR_162_2020.Infrastructure
             //    .HasIndex(u => u.Email)
             //    .IsUnique();
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new OrderConfig());
+            modelBuilder.ApplyConfiguration(new ArticleConfig());
             //base.OnModelCreating(modelBuilder);
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(APIDBContext).Assembly);
         }

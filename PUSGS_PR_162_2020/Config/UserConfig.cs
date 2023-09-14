@@ -23,6 +23,8 @@ namespace PUSGS_PR_162_2020.Config
             builder.Property(x => x.Address).IsRequired().HasMaxLength(30);
             builder.Property(x => x.Type).HasConversion<string>();
 
+            builder.Property(x => x.VerificationStatus).HasConversion<string>();
+
             //Add verification field
         }
     }

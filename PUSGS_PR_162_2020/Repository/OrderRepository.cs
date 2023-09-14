@@ -22,7 +22,7 @@ namespace PUSGS_PR_162_2020.Repository
 
         public List<Order> GetAllOrdersBuyer(OrderHelper helper)
         {
-            return _context.Orders.Where(x => x.BuyerID == helper.BuyerId).ToList();
+            return _context.Orders.Where(x => x.BuyerId == helper.BuyerId).ToList();
         }
     }
 }
