@@ -25,7 +25,6 @@ namespace PUSGS_PR_162_2020.Config
 
             builder.Property(x => x.VerificationStatus).HasConversion<string>();
 
-            //Add verification field
         }
     }
 }
