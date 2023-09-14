@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PUSGS_PR_162_2020.Config;
 using PUSGS_PR_162_2020.Models;
 
 namespace PUSGS_PR_162_2020.Infrastructure
@@ -16,16 +17,19 @@ namespace PUSGS_PR_162_2020.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-            .HasKey(u => u.Id);
+            //modelBuilder.Entity<User>()
+            //.HasKey(u => u.Id);
 
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.Username)
-                .IsUnique();
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(u => u.Username)
+            //    .IsUnique();
 
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.Email)
-                .IsUnique();
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(u => u.Email)
+            //    .IsUnique();
+            modelBuilder.ApplyConfiguration(new UserConfig());
+            //base.OnModelCreating(modelBuilder);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(APIDBContext).Assembly);
         }
     }
 }

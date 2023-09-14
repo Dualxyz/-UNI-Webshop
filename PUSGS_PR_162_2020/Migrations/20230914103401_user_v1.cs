@@ -5,7 +5,7 @@
 namespace PUSGS_PR_162_2020.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class user_v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,14 +16,14 @@ namespace PUSGS_PR_162_2020.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(250)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Birthdate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Birthdate = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
