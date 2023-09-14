@@ -10,6 +10,8 @@ namespace PUSGS_PR_162_2020.Models
         public string? Comment { get; set; }
         public long BuyerID { get; set; }
         public User? Buyer { get; set; }
+        public Article? Article { get; set; }
+        public long ArticleID { get; set; }
         public Status OrderStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public int? DeliveryTime { get; set; }

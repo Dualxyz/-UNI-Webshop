@@ -6,6 +6,7 @@ namespace PUSGS_PR_162_2020.Enums
     {
         ACCEPTED,
         REJECTED,
-        PENDING
+        PENDING,
+        FULFILLED,
     }
 }
