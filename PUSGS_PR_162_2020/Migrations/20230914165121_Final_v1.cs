@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PUSGS_PR_162_2020.Migrations
 {
     /// <inheritdoc />
-    public partial class test1 : Migration
+    public partial class Final_v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,8 +62,8 @@ namespace PUSGS_PR_162_2020.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: true),
                     BuyerId = table.Column<long>(type: "bigint", nullable: false),
                     ArticleId = table.Column<long>(type: "bigint", nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -12,8 +12,8 @@ using PUSGS_PR_162_2020.Infrastructure;
 namespace PUSGS_PR_162_2020.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20230914155901_test1")]
-    partial class test1
+    [Migration("20230914165121_Final_v1")]
+    partial class Final_v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,8 +69,8 @@ namespace PUSGS_PR_162_2020.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<long>("ArticleId")
                         .HasColumnType("bigint");
@@ -79,8 +79,8 @@ namespace PUSGS_PR_162_2020.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");

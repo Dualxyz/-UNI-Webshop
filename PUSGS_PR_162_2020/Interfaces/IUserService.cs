@@ -11,6 +11,8 @@ namespace PUSGS_PR_162_2020.Interfaces
         UserResponseDTO RegisterUser(RegisterRequestDTO requestDto);
         UserResponseDTO UpdateUser(long id, UserRequestDTO requestDto);
         LoginResponseDTO LoginUser(LoginRequestDTO requestDto);
-        ////VerificationResponseDto VerifyUser(long id, VerificationRequestDto requestDto);
+        VerificationResponseDTO VerifyUser(long id, VerificationResponseDTO requestDto);
+        //Delete user lol
+
     }
 }

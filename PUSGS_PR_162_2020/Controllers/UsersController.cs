@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -127,6 +129,24 @@ namespace PUSGS_PR_162_2020.Controllers
             }
 
             return Ok(resp);
+        }
+
+        [HttpPost("verify/{id}")]
+        //[Authorize(Roles = "Admin")]
+        public IActionResult VerifyUser(long id, [FromBody] VerificationResponseDTO requestDto)
+        {
+            VerificationResponseDTO user;
+
+            try
+            {
+                user = _userService.VerifyUser(id, requestDto);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+
+            return Ok(user);
         }
     }
 }

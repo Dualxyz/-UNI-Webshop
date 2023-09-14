@@ -12,6 +12,7 @@ namespace PUSGS_PR_162_2020.Mapper
             CreateMap<UserRequestDTO, User>().ReverseMap();
             CreateMap<User, UserResponseDTO>().ReverseMap();
             CreateMap<RegisterRequestDTO, User>().ReverseMap();
+
         }
     }
 }

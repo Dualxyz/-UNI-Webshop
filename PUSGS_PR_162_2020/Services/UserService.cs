@@ -125,5 +125,24 @@ namespace PUSGS_PR_162_2020.Services
                 return _mapper.Map<UserResponseDTO>(user);
             } catch (Exception ex) { throw new Exception(ex.Message); }
         }
+
+        public VerificationResponseDTO VerifyUser(long id, VerificationResponseDTO requestDto)
+        {
+            //talk to the database
+            User? user = _userRepository.GetUserById(id);
+            if (user == null) 
+            {
+                throw new Exception("User with a specified ID doesn't exist.");
+            }
+
+            if(user.Type != AccType.SELLER)
+            {
+                throw new Exception("Only sellers can be verified!");
+            }
+
+            _mapper.Map(requestDto, user);
+            _userRepository.SaveChanges();
+            return _mapper.Map<VerificationResponseDTO>(user);
+        }
     }
 }
