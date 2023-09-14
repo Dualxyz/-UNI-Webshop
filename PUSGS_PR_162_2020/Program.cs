@@ -35,6 +35,7 @@ builder.Services.AddSingleton(mapper);
 
 #region Adding all the Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 //FALI REPOSITORY ZA USER SERVICE!!!!
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();

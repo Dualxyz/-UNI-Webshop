@@ -8,6 +8,7 @@ using PUSGS_PR_162_2020.DTO.UserInfoDTO;
 using PUSGS_PR_162_2020.Enums;
 using PUSGS_PR_162_2020.Infrastructure;
 using PUSGS_PR_162_2020.Interfaces;
+using PUSGS_PR_162_2020.Interfaces.RepoInterfaces;
 using PUSGS_PR_162_2020.Models;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,24 +19,24 @@ namespace PUSGS_PR_162_2020.Services
 {
     public class UserService : IUserService
     {
-        private readonly APIDBContext _dbContext;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IConfigurationSection _secretKey;
 
-        public UserService(IConfiguration config, APIDBContext dbContext, IMapper mapper)
+        public UserService(IConfiguration config, IUserRepository userRepository, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
             _mapper = mapper;
             _secretKey = config.GetSection("secret");
         }
         public List<UserResponseDTO> GetAllUsers()
         {
-            return _mapper.Map<List<UserResponseDTO>>(_dbContext.Users.ToList());
+            return _mapper.Map<List<UserResponseDTO>>(_userRepository.GetAllUsers());
         }
 
         public UserResponseDTO GetUserById(long id)
         {
-            UserResponseDTO user = _mapper.Map<UserResponseDTO>(_dbContext.Users.Find(id));
+            UserResponseDTO user = _mapper.Map<UserResponseDTO>(_userRepository.GetUserById(id));
             if (user == null)
             {
                 throw new Exception("User doesn't exist with the provided ID");
@@ -46,7 +47,7 @@ namespace PUSGS_PR_162_2020.Services
 
         public LoginResponseDTO LoginUser(LoginRequestDTO requestDto)
         {
-            User? user = _dbContext.Users.FirstOrDefault(u => u.Email == requestDto.Email);
+            User? user = _userRepository.FindUser(requestDto);
             if (user == null)
             {
                 throw new Exception("Incorrect login credentials");
@@ -95,8 +96,7 @@ namespace PUSGS_PR_162_2020.Services
 
             try
             {
-                _dbContext.Users.Add(user);
-                _dbContext.SaveChanges();
+                _userRepository.AddUser(user);
             }
             catch (UniqueConstraintException)
             {
@@ -109,8 +109,9 @@ namespace PUSGS_PR_162_2020.Services
 
         public UserResponseDTO UpdateUser(long id, UserRequestDTO requestDto)
         {
-            User? user = _dbContext.Users.Find(id);
-            if(user != null)
+            //User? user = _dbContext.Users.Find(id);
+            User? user = _userRepository.GetUserById(id);
+            if (user != null)
             {
                 _mapper.Map(requestDto, user);   
             } else
@@ -120,7 +121,7 @@ namespace PUSGS_PR_162_2020.Services
 
             try
             {
-                _dbContext.SaveChanges();
+                _userRepository.SaveChanges();
                 return _mapper.Map<UserResponseDTO>(user);
             } catch (Exception ex) { throw new Exception(ex.Message); }
         }
