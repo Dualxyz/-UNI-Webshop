@@ -22,7 +22,7 @@ namespace PUSGS_PR_162_2020.Repository
                 return true;
             } catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.InnerException.Message);
             }
 
         }

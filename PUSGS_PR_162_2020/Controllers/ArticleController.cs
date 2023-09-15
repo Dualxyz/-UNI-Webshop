@@ -46,7 +46,7 @@ namespace PUSGS_PR_162_2020.Controllers
         public IActionResult CreateArticle([FromBody] ArticleRequestDTO requestDto)
         {
             //long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-            long userId = 0;
+            long userId = 1;
             ArticleResponseDTO article;
 
             try
