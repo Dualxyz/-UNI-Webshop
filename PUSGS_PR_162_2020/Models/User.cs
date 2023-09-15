@@ -17,7 +17,7 @@ namespace PUSGS_PR_162_2020.Models
         public string Address { get; set;} = string.Empty;
         public string Birthdate { get; set; } = string.Empty;
         public AccType Type { get; set; }
-        public VerificationStatus VerificationStatus { get; set; }
+        public VerificationStatus? VerificationStatus { get; set; }
         public List<Article>? Articles { get; set; }
         public List<Order>? Orders { get; set; }
 

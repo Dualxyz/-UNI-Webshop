@@ -62,10 +62,10 @@ namespace PUSGS_PR_162_2020.Services
             claims.Add(new Claim("Id", user.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Role, user.Type.ToString()));
 
-            //if (user.Type == AccType.SELLER && user.VerificationStatus == VerificationStatus.Accepted)
-            //{
-            //    claims.Add(new Claim("VerificationStatus", user.VerificationStatus.ToString()));
-            //}
+            if (user.VerificationStatus == VerificationStatus.ACCEPTED && user.Type == AccType.SELLER)
+            {
+                claims.Add(new Claim("VerificationStatus", user.VerificationStatus.ToString()));
+            }
 
             string? secretKeyValue = _secretKey.Value;
             if (secretKeyValue == null)
