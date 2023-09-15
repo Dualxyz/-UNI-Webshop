@@ -2,5 +2,6 @@
 {
     public class ArticleHelper
     {
+        public long SellerId { get; set; }
     }
 }

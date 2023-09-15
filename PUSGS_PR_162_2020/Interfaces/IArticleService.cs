@@ -6,10 +6,10 @@ namespace PUSGS_PR_162_2020.Interfaces
 {
     public interface IArticleService
     {
-        List<ArticleResponseDTO> GetAllArticles(ArticleHelper queryParameters);
+        List<ArticleResponseDTO> GetAllArticles(ArticleHelper articleHelper);
         ArticleResponseDTO GetArticleById(long id);
-        ArticleResponseDTO CreateArticle(ArticleResponseDTO requestDto, long userId);
-        ArticleResponseDTO UpdateArticle(long id, ArticleResponseDTO requestDto, long userId);
-        ArticleDeleteDTO DeleteArticle(long id, long userId);
+        ArticleResponseDTO CreateArticle(ArticleRequestDTO requestDto, long userId);
+        ArticleResponseDTO UpdateArticle(long id, ArticleRequestDTO requestDto, long userId);
+        ArticleDeleteReponseDTO DeleteArticle(long id, long userId);
     }
 }

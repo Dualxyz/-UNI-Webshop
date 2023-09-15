@@ -18,7 +18,6 @@ namespace PUSGS_PR_162_2020.Infrastructure
             
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfig());

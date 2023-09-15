@@ -72,10 +72,9 @@ namespace PUSGS_PR_162_2020.Services
             {
                 throw new Exception("Secret key is not set properly");
             }
+
             SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKeyValue));
-
             SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
             JwtSecurityToken securityToken = new JwtSecurityToken(
                 //issuer: "http://localhost",
                 claims: claims,
@@ -96,8 +95,7 @@ namespace PUSGS_PR_162_2020.Services
         {
             User user = _mapper.Map<User>(requestDto);
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
-
-            //Add verification status field (=
+            user.VerificationStatus = user.Type == AccType.SELLER? VerificationStatus.PENDING : null;
 
             try
             {
