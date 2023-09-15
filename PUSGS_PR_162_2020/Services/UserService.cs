@@ -67,7 +67,12 @@ namespace PUSGS_PR_162_2020.Services
             //    claims.Add(new Claim("VerificationStatus", user.VerificationStatus.ToString()));
             //}
 
-            SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.Value));
+            string? secretKeyValue = _secretKey.Value;
+            if (secretKeyValue == null)
+            {
+                throw new Exception("Secret key is not set properly");
+            }
+            SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKeyValue));
 
             SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
