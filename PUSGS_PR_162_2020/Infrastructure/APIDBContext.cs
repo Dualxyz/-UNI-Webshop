@@ -7,33 +7,23 @@ namespace PUSGS_PR_162_2020.Infrastructure
     public class APIDBContext : DbContext
     {
 
+        // Creating tables in the database through migrations
+        public DbSet<User> Users { get; set; }  
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Article> Articles { get; set; }
+
         //Ask from program.cs to provide options to connect to the database (the connection string etc..)
         public APIDBContext(DbContextOptions options):base(options)
         {
             
         }
 
-        public DbSet<User> Users { get; set; }  //Will be used to create a table with migrations
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<User>()
-            //.HasKey(u => u.Id);
-
-            //modelBuilder.Entity<User>()
-            //    .HasIndex(u => u.Username)
-            //    .IsUnique();
-
-            //modelBuilder.Entity<User>()
-            //    .HasIndex(u => u.Email)
-            //    .IsUnique();
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new OrderConfig());
             modelBuilder.ApplyConfiguration(new ArticleConfig());
-            //base.OnModelCreating(modelBuilder);
-            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(APIDBContext).Assembly);
         }
     }
 }
