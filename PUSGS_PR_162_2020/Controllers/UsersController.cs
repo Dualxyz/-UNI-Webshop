@@ -16,7 +16,7 @@ using PUSGS_PR_162_2020.Models;
 
 namespace PUSGS_PR_162_2020.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -55,11 +55,11 @@ namespace PUSGS_PR_162_2020.Controllers
         [HttpPut("{id}")]
         public IActionResult PutUser(long id, [FromBody] UserRequestDTO requestDto)
         {
-            //var smt = User.HasClaim("Id", id.ToString());
-            //if (!User.HasClaim("Id", id.ToString()))
-            //{
-            //    return Forbid();
-            //}
+            var smt = User.HasClaim("Id", id.ToString());
+            if (!User.HasClaim("Id", id.ToString()))
+            {
+                return Forbid();
+            }
 
             UserResponseDTO user;
 
@@ -132,7 +132,7 @@ namespace PUSGS_PR_162_2020.Controllers
         }
 
         [HttpPost("verify/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult VerifyUser(long id, [FromBody] VerificationResponseDTO requestDto)
         {
             VerificationResponseDTO user;

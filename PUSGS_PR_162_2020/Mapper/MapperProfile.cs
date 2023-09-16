@@ -20,9 +20,11 @@ namespace PUSGS_PR_162_2020.Mapper
             CreateMap<Article, ArticleDeleteReponseDTO>();
             CreateMap<ArticleRequestDTO, Article>();
 
-            CreateMap<Order, OrderResponseDTO>().ReverseMap();
-            CreateMap<Order, DeleteResponseDTO>().ReverseMap();
-            CreateMap<OrderRequestDTO, Order>().ReverseMap();
+            CreateMap<Order, OrderResponseDTO>();
+            CreateMap<Order, OrderRequestDTO>();
+            CreateMap<OrderRequestDTO, Order>();
+            CreateMap<Order, DeleteResponseDTO>();
+            CreateMap<OrderRequestDTO, Order>();
 
         }
     }

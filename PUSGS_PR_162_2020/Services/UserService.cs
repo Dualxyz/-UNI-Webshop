@@ -76,9 +76,9 @@ namespace PUSGS_PR_162_2020.Services
             SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKeyValue));
             SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             JwtSecurityToken securityToken = new JwtSecurityToken(
-                issuer: "http://localhost:3000",
+                issuer: "http://localhost:44319",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(2),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: signingCredentials
             );
 

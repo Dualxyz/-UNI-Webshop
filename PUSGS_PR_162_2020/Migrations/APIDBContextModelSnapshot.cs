@@ -114,28 +114,28 @@ namespace PUSGS_PR_162_2020.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(44)
-                        .HasColumnType("nvarchar(44)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Birthdate")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(42)
-                        .HasColumnType("nvarchar(42)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(44)
-                        .HasColumnType("nvarchar(44)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(44)
-                        .HasColumnType("nvarchar(44)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -148,8 +148,8 @@ namespace PUSGS_PR_162_2020.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("VerificationStatus")
                         .HasColumnType("nvarchar(max)");

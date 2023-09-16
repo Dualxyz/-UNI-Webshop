@@ -14,9 +14,11 @@ namespace PUSGS_PR_162_2020.Services
     {
         private readonly IMapper _mapper;
         private readonly IOrderRepository _orderRepository;
-        public OrderService(IMapper mapper, IOrderRepository orderRepository) { 
+        private readonly IArticleRepository _articleRepository;
+        public OrderService(IMapper mapper, IOrderRepository orderRepository, IArticleRepository articleRepository) { 
             _mapper = mapper;
             _orderRepository = orderRepository;
+            _articleRepository = articleRepository;
         }
         public DeleteResponseDTO CancelOrder(long id, long userId)
         {
@@ -58,7 +60,7 @@ namespace PUSGS_PR_162_2020.Services
             Order order = _mapper.Map<Order>(requestDto);
             order.BuyerId = userId;
 
-            Article? article = _orderRepository.GetArticle(order.Id);
+            Article? article = _articleRepository.GetArticleById(order.ArticleId);
 
             if (article == null)
             {

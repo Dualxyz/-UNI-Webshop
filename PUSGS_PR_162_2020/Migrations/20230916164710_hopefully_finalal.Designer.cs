@@ -12,8 +12,8 @@ using PUSGS_PR_162_2020.Infrastructure;
 namespace PUSGS_PR_162_2020.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20230916150608_fixedEnum_v5")]
-    partial class fixedEnum_v5
+    [Migration("20230916164710_hopefully_finalal")]
+    partial class hopefully_finalal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,28 +117,28 @@ namespace PUSGS_PR_162_2020.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(44)
-                        .HasColumnType("nvarchar(44)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Birthdate")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(42)
-                        .HasColumnType("nvarchar(42)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(44)
-                        .HasColumnType("nvarchar(44)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(44)
-                        .HasColumnType("nvarchar(44)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -151,8 +151,8 @@ namespace PUSGS_PR_162_2020.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("VerificationStatus")
                         .HasColumnType("nvarchar(max)");

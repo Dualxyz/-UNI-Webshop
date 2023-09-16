@@ -11,20 +11,20 @@ namespace PUSGS_PR_162_2020.Config
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Username).IsRequired().HasMaxLength(40);
+            builder.Property(x => x.Username).IsRequired().HasMaxLength(100);
 
-            builder.Property(x => x.Email).IsRequired().HasMaxLength(42);
+            builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
             builder.HasIndex(x => x.Email).IsUnique();
 
             builder.Property(x => x.Password).IsRequired().HasMaxLength(200);
 
-            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(44);
+            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(100);
 
-            builder.Property(x => x.LastName).IsRequired().HasMaxLength(44);
+            builder.Property(x => x.LastName).IsRequired().HasMaxLength(100);
 
-            builder.Property(x => x.Birthdate).HasMaxLength(30);
+            builder.Property(x => x.Birthdate).HasMaxLength(100);
 
-            builder.Property(x => x.Address).IsRequired().HasMaxLength(44);
+            builder.Property(x => x.Address).IsRequired().HasMaxLength(100);
 
             builder.Property(x => x.Role).HasConversion<string>();
 

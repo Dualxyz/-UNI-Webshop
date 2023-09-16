@@ -44,7 +44,6 @@ namespace PUSGS_PR_162_2020.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
-        //options.AddPolicy("IsVerifiedSeller", policy => policy.RequireClaim("VerificationStatus", "Accepted"));
         public IActionResult CreateArticle([FromBody] ArticleRequestDTO requestDto)
         {
             long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
@@ -64,11 +63,11 @@ namespace PUSGS_PR_162_2020.Controllers
         }
 
         [HttpPut("{id}")]
-        //[Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
+        [Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
         public IActionResult UpdateArticle(long id, [FromBody] ArticleRequestDTO requestDto)
         {
-            //long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-            long userId = 0;
+            long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+
             ArticleResponseDTO article;
 
             try
@@ -85,11 +84,10 @@ namespace PUSGS_PR_162_2020.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
+        [Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
         public IActionResult DeleteArticle(long id)
         {
-            //long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-            long userId = 0;
+            long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
             ArticleDeleteReponseDTO responseDto;
 
             try

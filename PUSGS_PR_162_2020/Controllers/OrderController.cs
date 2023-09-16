@@ -8,7 +8,7 @@ using System.Data;
 
 namespace PUSGS_PR_162_2020.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -42,11 +42,10 @@ namespace PUSGS_PR_162_2020.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Buyer")]
+        [Authorize(Roles = "Buyer")]
         public IActionResult CreateOrder([FromBody] OrderRequestDTO requestDto)
         {
-            //long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-            long userId = 0;
+            long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
             OrderResponseDTO order;
 
             try
@@ -62,11 +61,10 @@ namespace PUSGS_PR_162_2020.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Buyer")]
+        [Authorize(Roles = "Buyer")]
         public IActionResult DeleteOrder(long id)
         {
-            //long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-            long userId = 0;
+            long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
             DeleteResponseDTO responseDto;
 
             try
