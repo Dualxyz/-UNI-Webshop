@@ -12,7 +12,7 @@ namespace PUSGS_PR_162_2020.Models
         public User? Buyer { get; set; }
         public Article? Article { get; set; }
         public long ArticleId { get; set; }
-        public Status OrderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public int? DeliveryTime { get; set; }
         public double? Price { get; set; }

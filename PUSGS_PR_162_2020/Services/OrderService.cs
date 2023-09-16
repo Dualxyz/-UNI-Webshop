@@ -71,7 +71,7 @@ namespace PUSGS_PR_162_2020.Services
             }
 
             article.Quantity -= order.Quantity;
-            order.OrderStatus = Status.PENDING;
+            order.OrderStatus = OrderStatus.Pending;
             order.Price = article.Price * order.Quantity;
             order.CreatedAt = DateTime.UtcNow;
             order.DeliveryTime = new Random().Next(1, 25);

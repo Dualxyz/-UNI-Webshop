@@ -11,6 +11,6 @@ namespace PUSGS_PR_162_2020.DTO.RegisterDTO
         public string LastName { get; set; } = string.Empty;
         public string Birthdate { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
-        public AccType Role { get; set; }
+        public UserRole Role { get; set; }
     }
 }

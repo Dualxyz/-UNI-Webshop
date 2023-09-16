@@ -85,18 +85,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-//// Will I need cors?
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy(name: "cors", builder =>
-//    {
-//        builder
-//        .WithOrigins("http://localhost:3000")
-//        .AllowAnyHeader()
-//        .AllowAnyMethod()
-//        .AllowCredentials();
-//    });
-//});
 
 builder.Services.AddAuthorization(options =>
 {
@@ -138,6 +126,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("cors");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

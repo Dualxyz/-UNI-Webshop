@@ -10,7 +10,7 @@ namespace PUSGS_PR_162_2020.DTO.OrderDTO
         public string? Address { get; set; }
         public long ArticleId { get; set; }
         public long BuyerId { get; set; }
-        public Status OrderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public int DeliveryTime { get; set; }
         public double? Price { get; set; }

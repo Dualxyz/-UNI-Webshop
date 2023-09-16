@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using PUSGS_PR_162_2020.DTO.AricleDTO;
 using PUSGS_PR_162_2020.DTO.AricleDTO.ArticleHelper;
 using PUSGS_PR_162_2020.DTO.OrderDTO;
@@ -9,7 +10,7 @@ using System.Data;
 
 namespace PUSGS_PR_162_2020.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/articles")]
     [ApiController]
     public class ArticleController : ControllerBase
     {
@@ -42,11 +43,12 @@ namespace PUSGS_PR_162_2020.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
+        [Authorize(Roles = "Seller", Policy = "IsVerifiedSeller")]
+        //options.AddPolicy("IsVerifiedSeller", policy => policy.RequireClaim("VerificationStatus", "Accepted"));
         public IActionResult CreateArticle([FromBody] ArticleRequestDTO requestDto)
         {
-            //long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-            long userId = 1;
+            long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+            //long userId = 12;
             ArticleResponseDTO article;
 
             try

@@ -60,9 +60,9 @@ namespace PUSGS_PR_162_2020.Services
 
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("Id", user.Id.ToString()));
-            claims.Add(new Claim(ClaimTypes.Role, user.Type.ToString()));
+            claims.Add(new Claim(ClaimTypes.Role, user.Role.ToString()));
 
-            if (user.VerificationStatus == VerificationStatus.ACCEPTED && user.Type == AccType.SELLER)
+            if (user.VerificationStatus == VerificationStatus.Accepted && user.Role == UserRole.Seller)
             {
                 claims.Add(new Claim("VerificationStatus", user.VerificationStatus.ToString()));
             }
@@ -76,7 +76,7 @@ namespace PUSGS_PR_162_2020.Services
             SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKeyValue));
             SigningCredentials signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             JwtSecurityToken securityToken = new JwtSecurityToken(
-                //issuer: "http://localhost",
+                issuer: "http://localhost:3000",
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(2),
                 signingCredentials: signingCredentials
@@ -95,7 +95,7 @@ namespace PUSGS_PR_162_2020.Services
         {
             User user = _mapper.Map<User>(requestDto);
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
-            user.VerificationStatus = user.Type == AccType.SELLER? VerificationStatus.PENDING : null;
+            user.VerificationStatus = user.Role == UserRole.Seller ? VerificationStatus.Pending : null;
 
             try
             {
@@ -112,7 +112,6 @@ namespace PUSGS_PR_162_2020.Services
 
         public UserResponseDTO UpdateUser(long id, UserRequestDTO requestDto)
         {
-            //User? user = _dbContext.Users.Find(id);
             User? user = _userRepository.GetUserById(id);
             if (user != null)
             {
@@ -138,7 +137,7 @@ namespace PUSGS_PR_162_2020.Services
                 throw new Exception("User with a specified ID doesn't exist.");
             }
 
-            if(user.Type != AccType.SELLER)
+            if(user.Role != UserRole.Seller)
             {
                 throw new Exception("Only sellers can be verified!");
             }

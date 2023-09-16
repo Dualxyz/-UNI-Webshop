@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PUSGS_PR_162_2020.Enums;
 using PUSGS_PR_162_2020.Models;
 
 namespace PUSGS_PR_162_2020.Config
@@ -28,7 +29,7 @@ namespace PUSGS_PR_162_2020.Config
                 .HasForeignKey(x => x.BuyerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Property(x => x.OrderStatus).HasConversion<string>();
+            builder.Property<OrderStatus>(x => x.OrderStatus).HasConversion<string>();
         }
     }
 }

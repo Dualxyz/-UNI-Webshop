@@ -2,8 +2,8 @@
 {
     public enum VerificationStatus
     {
-        ACCEPTED,
-        REJECTED,
-        PENDING
+        Pending,
+        Rejected,
+        Accepted
     }
 }
