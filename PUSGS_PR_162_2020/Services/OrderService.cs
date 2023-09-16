@@ -103,11 +103,11 @@ namespace PUSGS_PR_162_2020.Services
 
             if(orderHelper.BuyerId > 0)
             {
-                _orderRepository.GetAllOrdersBuyer(orderHelper);
+                orders = _orderRepository.GetAllOrdersBuyer(orderHelper);
             } else if (orderHelper.SellerId > 0)
             {
                 //repo
-                _orderRepository.GetOrderBySellerId(orderHelper.SellerId);
+                orders = _orderRepository.GetOrderBySellerId(orderHelper.SellerId);
             } else
             {
                 //get orders from list
@@ -120,7 +120,7 @@ namespace PUSGS_PR_162_2020.Services
 
         public OrderResponseDTO GetOrderById(long id)
         {
-            OrderResponseDTO order = _mapper.Map<OrderResponseDTO>(GetOrderById(id));
+            OrderResponseDTO order = _mapper.Map<OrderResponseDTO>(_orderRepository.GetOrderById(id));
 
             if (order == null)
             {

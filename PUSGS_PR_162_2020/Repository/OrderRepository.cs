@@ -30,9 +30,9 @@ namespace PUSGS_PR_162_2020.Repository
             return _context.Orders.Where(x => x.Article.SellerId == id).ToList();
         }
 
-        public Order? GetOrderById(long id)
+        public Order? GetOrderById(long OrderID)
         {
-            return _context.Orders.Find(id);
+            return _context.Orders.Find(OrderID);
         }
 
         public void Save()
