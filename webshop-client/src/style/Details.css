@@ -1,0 +1,13 @@
+.details-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-item-title {
+  font-weight: bold;
+}
+
+.details-item-value {
+  font-weight: 500;
+  color: #555;
+}

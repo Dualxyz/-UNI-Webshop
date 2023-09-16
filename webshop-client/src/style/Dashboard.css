@@ -1,0 +1,10 @@
+.profile-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-edit {
+  color: orange;
+  cursor: pointer;
+}
