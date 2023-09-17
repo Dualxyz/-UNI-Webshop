@@ -11,6 +11,7 @@ using PUSGS_PR_162_2020.Mapper;
 using PUSGS_PR_162_2020.Repository;
 using PUSGS_PR_162_2020.Services;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,10 @@ builder.Services.AddSwaggerGen();
 //Dependancy injection for APIDBContext
 builder.Services.AddDbContext<APIDBContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectString")).UseExceptionProcessor());
+#endregion
 
+#region Secrets
+builder.Configuration.AddUserSecrets<UserService>();
 #endregion
 
 #region Creating a Mapper Profile

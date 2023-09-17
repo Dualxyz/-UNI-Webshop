@@ -12,6 +12,7 @@ using PUSGS_PR_162_2020.Interfaces.RepoInterfaces;
 using PUSGS_PR_162_2020.Models;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 
@@ -22,9 +23,11 @@ namespace PUSGS_PR_162_2020.Services
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IConfigurationSection _secretKey;
+        private readonly IConfiguration _configuration;
 
         public UserService(IConfiguration config, IUserRepository userRepository, IMapper mapper)
         {
+            _configuration = config;
             _userRepository = userRepository;
             _mapper = mapper;
             _secretKey = config.GetSection("secret");
@@ -141,6 +144,41 @@ namespace PUSGS_PR_162_2020.Services
             {
                 throw new Exception("Only sellers can be verified!");
             }
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("andrejjovanovic997@gmail.com");
+            message.To.Add(new MailAddress(user.Email));
+            message.Subject = "Account verification";
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.EnableSsl = true;
+            client.Credentials = new System.Net.NetworkCredential(_configuration["SmtpSettings:Email"], _configuration["SmtpSettings:Password"]);
+
+            if (requestDto.VerificationStatus == VerificationStatus.Accepted)
+            {
+                try
+                {
+                    message.Body = "You've been successfully verified.";
+                    client.Send(message);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"{e.Message}");
+                }
+            } else if (requestDto.VerificationStatus == VerificationStatus.Rejected)
+            {
+                try
+                {
+                    message.Body = "You've been rejected";
+                    client.Send(message);
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"{e.Message}");
+                }
+            }
+
+            
 
             _mapper.Map(requestDto, user);
             _userRepository.SaveChanges();
