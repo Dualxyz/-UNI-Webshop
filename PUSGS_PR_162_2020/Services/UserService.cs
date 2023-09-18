@@ -151,6 +151,8 @@ namespace PUSGS_PR_162_2020.Services
             message.Subject = "Account verification";
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
+            var email = _configuration["SmtpSettings:Email"];
+            var pw = _configuration["SmtpSettings:Password"];
             client.Credentials = new System.Net.NetworkCredential(_configuration["SmtpSettings:Email"], _configuration["SmtpSettings:Password"]);
 
             if (requestDto.VerificationStatus == VerificationStatus.Accepted)

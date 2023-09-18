@@ -109,6 +109,8 @@ namespace PUSGS_PR_162_2020.Services
                 throw new Exception("Sellers can only modify their own articles!");
             }
 
+
+
             _mapper.Map(requestDto, article);
 
             try
