@@ -3,6 +3,7 @@ Webshop application which simulates the interaction of buying an article from an
 
 
 Technologies:
+
 BackEnd: ASP.NET Entity Framework / core 6.0
 FrontEnd: React 
 Database: SQL Server
